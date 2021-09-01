@@ -38,7 +38,7 @@ namespace Factura2021.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CategoriaRequest categoria)  //tbl_personxta es la tabla de la bd
+        public async Task<ActionResult> Post([FromBody] CategoriaRequest categoria)  //tbl_personxta es la tabla de la b d
         {
             GeneralResponse categoriaResponse = await _icategoria.PostCategoria(categoria);
             if (categoriaResponse.Exito == 1) { return Ok(categoriaResponse); }
