@@ -19,7 +19,7 @@ namespace Factura2021.Service
         public ServiceProducto(FacturaContext context)
         {
             this._context = context;
-        }
+        }//////asasasasasasas
         public async Task<IEnumerable> GetProducto()
         {
             //List<TblProducto> listProducto = await _context.TblProductos.Where(x => x.IdEstado == 1).ToListAsync();
