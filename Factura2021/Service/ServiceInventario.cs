@@ -107,7 +107,7 @@ namespace Factura2021.Service
             catch (Exception ex)
             {
                 resp.Exito = 0;
-                resp.Mensaje = "error al actualizar PONTE PILOSO  " + ex.Message;
+                resp.Mensaje = "error al actualizar" + ex.Message;
                 return resp;
                 // return false;
             }

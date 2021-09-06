@@ -1,5 +1,6 @@
 ﻿using Factura2021.Interface;
 using Factura2021.Models;
+using Factura2021.Models.Response;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -24,24 +25,29 @@ namespace Factura2021.Controller
             _idetalle = interfaceDetalle;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Get()
+        [HttpGet("{id}")]
+        public async Task<ActionResult> Get(int id)
         {
-            var listDetalle = await _idetalle.GetDetalle();
-            return Ok(listDetalle);
+            GeneralResponse resp = new GeneralResponse();
+            var listDetalle = await _idetalle.GetDetalle(id);
+            resp.Exito = 1;
+            resp.Mensaje = "Bien hecho";
+            resp.Data = listDetalle;
+
+            return Ok(resp);
             //return await _context.TblCategoria.ToListAsync();
         }
 
-        [HttpPost]
+      /*  [HttpPost]
         public async Task<ActionResult> Post([FromBody] TblDetalle detalle)  //tbl_personxta es la tabla de la data base
         {
             bool exito = await _idetalle.PostDetalle(detalle);
             if (exito) { return Ok(detalle); }
             else //if (!exito)
                 return BadRequest();
-        }
+        }*/
 
-        [HttpPut("{id}")]
+       /* [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] TblDetalle detalle)
         {
             bool exito = await _idetalle.PutDetalle(id, detalle);
@@ -49,9 +55,9 @@ namespace Factura2021.Controller
             if (exito) { return Ok(id); }
             else //if (!exito)
                 return BadRequest();
-        }
+        }*/
 
-        [HttpDelete("{id}")]
+       /* [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             bool exito = await _idetalle.DeleteDetalle(id);
@@ -59,7 +65,7 @@ namespace Factura2021.Controller
             if (exito) { return Ok(id); }
             else
                 return BadRequest();
-        }
+        }*/
 
 
     }
