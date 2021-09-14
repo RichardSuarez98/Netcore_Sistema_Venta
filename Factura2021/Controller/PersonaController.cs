@@ -38,6 +38,34 @@ namespace Factura2021.Controller
             //return await _context.TblCategoria.ToListAsync();
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetPerso(string id)
+        {
+             GeneralResponse respuesta = new GeneralResponse();
+            var listPersona = await _ipersona.GetPersonaBuscar(id);
+          //  GeneralResponse resp = await _ipersona.GetPersonaBuscar(id);
+            // var listPersona = await _ipersona.GetPersonaBuscar(id);
+            if(listPersona==null)
+            ///  if (resp.Exito == 1)
+             {
+                // resp.Data = listPersona;
+                respuesta.Exito = 0;
+                respuesta.Mensaje = "Cedula no existente";
+                // return BadRequest(respuesta);
+                return Ok(respuesta);
+            }
+            else
+            {
+                //respuesta.Exito = 1;
+                //respuesta.Data = listPersona;
+                //respuesta.Mensaje = "Registro de cedula ha sido encontrado";
+                return Ok(listPersona);
+            }
+            
+          //  return Ok(resp.Mensaje);
+            //return await _context.TblCategoria.ToListAsync();
+        }
+
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] PersonaRequest persona)  //tbl_personxta es la tabla de la data base
         {

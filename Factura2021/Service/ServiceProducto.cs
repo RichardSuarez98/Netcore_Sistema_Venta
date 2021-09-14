@@ -66,6 +66,37 @@ namespace Factura2021.Service
             // return await _context.TblCategoria.ToListAsync();
         }
 
+        public async Task<GeneralResponse> GetProductoBuscar(int id)
+        {
+            GeneralResponse resp = new GeneralResponse();
+
+            dynamic listProducto = await _context.TblInventarios.Include(x => x.IdProductoNavigation)
+                                                                              .Where(i => i.IdEstado == 1 && i.IdProducto==id)
+                                                                              .Select(x => new
+                                                                              {
+                                                                                  x.IdInventario,
+                                                                                  x.IdProducto,
+                                                                                  x.IdProductoNavigation.NombreProducto,
+                                                                                  x.Iva,
+                                                                                  x.PrecioUnitario,
+                                                                                  x.Cantidad,
+                                                                                  x.IdEstado
+
+                                                                              }).FirstOrDefaultAsync();
+            if (listProducto == null)
+            {
+                return null;
+            }
+            else
+            {
+                resp.Exito = 1;
+                resp.Mensaje = "bien hecho";
+                resp.Data = listProducto;
+                return resp;
+                // return listPersona;
+            }      
+        }
+
         public async Task<GeneralResponse> PostProducto([FromBody] ProductoRequest producto)
         {
             GeneralResponse resp = new GeneralResponse();

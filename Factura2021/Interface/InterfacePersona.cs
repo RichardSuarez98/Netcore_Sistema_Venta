@@ -14,6 +14,7 @@ namespace Factura2021.Interface
     {
        // Task<List<TblPersona>> GetPersona();
         Task<IEnumerable> GetPersona();
+        Task<GeneralResponse> GetPersonaBuscar(string id);
         Task<GeneralResponse> PostPersona([FromBody] PersonaRequest persona);
         Task<GeneralResponse> PutPersona([FromBody] PersonaRequest persona);
         Task<GeneralResponse> DeletePersona(PersonaRequest persona);

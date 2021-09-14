@@ -13,6 +13,8 @@ namespace Factura2021.Interface
     public interface InterfaceProducto
     {
         Task<IEnumerable> GetProducto();
+        Task<GeneralResponse> GetProductoBuscar(int id);
+
         Task<GeneralResponse> PostProducto([FromBody] ProductoRequest producto);
         Task<GeneralResponse> PutProducto([FromBody] ProductoRequest producto);
         Task<GeneralResponse> DeleteProducto(ProductoRequest producto);

@@ -237,6 +237,7 @@ namespace Factura2021.Service
 
                 // userresponse.NombreUsuario = model.NombreUsuario;
                 userresponse.NombreUsuario = persona.NombrePersona;
+                userresponse.idUsuario = usuari.IdUsuario;
                 // userresponse.NombreUsuario = usuari.NombreUsuario;
                 userresponse.Token = GetToken(usuari);
                // return userresponse;

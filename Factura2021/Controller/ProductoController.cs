@@ -35,6 +35,25 @@ namespace Factura2021.Controller
             //return await _context.TblCategoria.ToListAsync();
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetProduc(int id)
+        {
+            GeneralResponse respuesta = new GeneralResponse();
+            var listProducto = await _iproducto.GetProductoBuscar(id);
+
+            if (listProducto == null)
+            {
+                respuesta.Exito = 0;
+                respuesta.Mensaje = "Producto no existente";
+                return Ok(respuesta);
+            }
+            else
+            {
+                return Ok(listProducto);
+            }
+        }
+
+
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ProductoRequest producto)  //tbl_personxta es la tabla de la data base
         {

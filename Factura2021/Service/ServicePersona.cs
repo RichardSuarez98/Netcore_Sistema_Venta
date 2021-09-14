@@ -39,6 +39,52 @@ namespace Factura2021.Service
             // return await _context.TblCategoria.ToListAsync();
         }
 
+        public async Task<GeneralResponse> GetPersonaBuscar(string id)
+        {      
+
+            //return listPersona;
+            GeneralResponse resp = new GeneralResponse();
+
+           // try
+            //{
+                dynamic listPersona = await _context.TblPersonas.Include(x => x.IdTipoPersonaNavigation)
+                                                                                                   .Where(x => x.IdEstado == 1 && x.Cedula == id)
+                                                                                                   .Select(x => new
+                                                                                                   {
+                                                                                                       x.IdPersona,
+                                                                                                       x.NombrePersona,
+                                                                                                       x.Cedula,
+                                                                                                       x.Edad,
+                                                                                                       x.IdTipoPersonaNavigation.NombreTipoPersona,
+                                                                                                       x.IdEstado
+                                                                                                   }).FirstOrDefaultAsync();
+                //resp.Exito = 1;
+                //resp.Mensaje = "bien hecho";
+                //resp.Data = listPersona;
+                //return resp;
+                if (listPersona ==null)
+                {
+                return null;
+                }
+                else
+                {
+                resp.Exito = 1;
+                resp.Mensaje = "bien hecho";
+                resp.Data = listPersona;
+                return resp;
+                // return listPersona;
+            }
+            //  }
+            // catch (Exception ex)
+            //  {
+            //      resp.Exito = 0;
+            //      resp.Mensaje = "error al buscar" + ex.Message;
+            //      return resp;
+            //  }
+
+
+        }
+
         public async Task<GeneralResponse> PostPersona([FromBody] PersonaRequest persona)
         {
             GeneralResponse resp = new GeneralResponse();
@@ -106,7 +152,7 @@ namespace Factura2021.Service
            
             try
             {
-                var per = await _context.TblPersonas.FindAsync(persona);
+                var per = await _context.TblPersonas.FindAsync(persona.IdPersona);
                 per.IdEstado = 0;//estaba 2
                 _context.Entry(per).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 //_context.TblPersonas.Remove(persona);

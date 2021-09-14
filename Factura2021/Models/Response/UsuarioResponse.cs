@@ -10,6 +10,8 @@ namespace Factura2021.Models.Response
         public string NombreUsuario { get; set; }
 
         public string Token { get; set; }
+
+        public int idUsuario { get; set; }
     }
 
 
